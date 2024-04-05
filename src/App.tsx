@@ -46,7 +46,7 @@ function App({
   }, [user, hash, assistantId]);
 
   return (
-    <GuiProvider theme={theme} colorScheme={colorScheme}>
+    <GuiProvider theme={theme}>
       <ServiceModule />
     </GuiProvider>
   );
