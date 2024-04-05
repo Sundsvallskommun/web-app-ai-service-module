@@ -27,6 +27,7 @@ export const ServiceModule = () => {
 
   const [query, setQuery] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const showHistory = history.length > 0;
 
@@ -93,11 +94,13 @@ export const ServiceModule = () => {
             {header}
           </h2>
           <div className="w-full relative">
-            <h3
+            <FormLabel
+              htmlFor="query"
+              id="query-label"
               className={cx(`text-large ${brandText} text-light-primary mb-sm`)}
             >
-              {subHeader}
-            </h3>
+              {`Ställ en fråga till ${import.meta.env.VITE_ASSISTANT_NAME}`}
+            </FormLabel>
             <div className="h-[4.8rem] flex justify-end">
               <div
                 className={cx(
@@ -210,18 +213,12 @@ export const ServiceModule = () => {
                       showHistory ? `m-8` : "m-0"
                     )}
                   >
-                    <FormLabel className="sr-only">
-                      {showHistory
-                        ? "Ställ en följdfråga"
-                        : `Ställ en fråga till ${
-                            import.meta.env.VITE_ASSISTANT_NAME
-                          }`}
-                    </FormLabel>
                     <Input.Group
                       size="lg"
                       className="border-solid border-gray-300"
                     >
                       <Input
+                        ref={inputRef}
                         className="w-4/5"
                         type="text"
                         value={query}
@@ -238,36 +235,23 @@ export const ServiceModule = () => {
                           showHistory ? "Ställ en följdfråga" : `Fråga något`
                         }
                       />
-                      <Input.RightAddin icon className="md:pr-8">
+                      <Input.RightAddin icon className="pr-8">
                         {done ? (
                           <>
                             <>
                               <Button
-                                className={cx(
-                                  `hidden md:flex ${brandButtonColor}`
-                                )}
-                                aria-label="Skicka fråga"
-                                disabled={!assistantId}
+                                className={cx(`flex ${brandButtonColor}`)}
+                                disabled={
+                                  !assistantId || !query || query.trim() === ""
+                                }
                                 onClick={() => {
                                   handleQuerySubmit(query);
                                   setQuery("");
+                                  inputRef.current?.focus();
                                 }}
                                 size="sm"
                               >
                                 <span>Skicka</span>
-                              </Button>
-                              <Button
-                                iconButton
-                                aria-label="Skicka fråga"
-                                disabled={!assistantId}
-                                className="flex md:hidden -mr-10"
-                                onClick={() => {
-                                  handleQuerySubmit(query);
-                                  setQuery("");
-                                }}
-                                size="sm"
-                              >
-                                <Icon name={"send-horizontal"} size={20} />
                               </Button>
                             </>
                           </>
@@ -311,6 +295,8 @@ export const ServiceModule = () => {
                     clearHistory();
                     setQuery(s);
                     handleQuerySubmit(s);
+                    setQuery("");
+                    inputRef.current?.focus();
                   }}
                   className={cx(
                     `p-12 font-semibold text-grey-900 text-small flex items-center justify-around gap-12 rounded-bl-0`,
