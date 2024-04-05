@@ -2,14 +2,22 @@ import { Link } from "@sk-web-gui/react";
 import Markdown from "react-markdown";
 import sanitized from "../services/sanitizer-service";
 
-export const MarkdownRendered = (props: { text: string }) => (
+export const MarkdownRendered: React.FC<{
+  text: string;
+  tabbable?: boolean;
+}> = ({ text, tabbable = true }) => (
   <Markdown
     disallowedElements={["script", "iframe"]}
     components={{
       a(props) {
         const { node, href, title } = props;
         return (
-          <Link external href={href} className="block break-all my-sm">
+          <Link
+            tabindex={tabbable ? 0 : -1}
+            external
+            href={href}
+            className="block break-all my-sm"
+          >
             {href}
           </Link>
         );
@@ -25,6 +33,6 @@ export const MarkdownRendered = (props: { text: string }) => (
       },
     }}
   >
-    {sanitized(props.text)}
+    {sanitized(text)}
   </Markdown>
 );

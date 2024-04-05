@@ -96,7 +96,7 @@ export const ChatHistory: React.FC<{
           </div>
         ))}
       <div aria-live={"polite"} className="sr-only">
-        <MarkdownRendered text={sanitized(lastMessage)} />
+        <MarkdownRendered tabbable={false} text={sanitized(lastMessage)} />
       </div>
       <div ref={scrollRef}></div>
     </div>
