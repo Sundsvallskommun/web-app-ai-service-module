@@ -23,7 +23,8 @@ import { ChatHistory } from "./ChatHistory";
 export const ServiceModule = () => {
   const showReferences = true;
   const { assistantId } = useAppContext();
-  const { history, sendQuery, addHistoryEntry, clearHistory, done } = useChat();
+  const { history, sendQuery, addHistoryEntry, clearHistory, done, error } =
+    useChat();
   const [lastMessage, setLastMessage] = useState("");
 
   const [query, setQuery] = useState("");
@@ -46,6 +47,7 @@ export const ServiceModule = () => {
 
   const handleQuerySubmit = (q: string) => {
     if (q.trim() !== "") {
+      setLastMessage(`Skickar fråga: ${q}`);
       sendQuery(q);
     }
   };
@@ -151,9 +153,6 @@ export const ServiceModule = () => {
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                           setQuery(e.target.value)
                         }
-                        placeholder={
-                          showHistory ? "Ställ en följdfråga" : `Fråga något`
-                        }
                       />
                       <Input.RightAddin icon className="pr-8">
                         {done ? (
@@ -190,7 +189,7 @@ export const ServiceModule = () => {
             >
               <Link className="text-light-primary ">
                 Så använder vi artificiell intelligens
-                </Link>
+              </Link>
             </div>
           </div>
         </div>
