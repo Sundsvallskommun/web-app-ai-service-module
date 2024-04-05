@@ -156,24 +156,20 @@ export const ServiceModule = () => {
                       />
                       <Input.RightAddin icon className="pr-8">
                         {done ? (
-                          <>
-                            <>
-                              <Button
-                                className={cx(`flex ${brandButtonColor}`)}
-                                disabled={
-                                  !assistantId || !query || query.trim() === ""
-                                }
-                                onClick={() => {
-                                  handleQuerySubmit(query);
-                                  setQuery("");
-                                  inputRef.current?.focus();
-                                }}
-                                size="sm"
-                              >
-                                <span>Skicka</span>
-                              </Button>
-                            </>
-                          </>
+                          <Button
+                            className={cx(`flex ${brandButtonColor}`)}
+                            disabled={
+                              !assistantId || !query || query.trim() === ""
+                            }
+                            onClick={() => {
+                              handleQuerySubmit(query);
+                              setQuery("");
+                              inputRef.current?.focus();
+                            }}
+                            size="sm"
+                          >
+                            <span>Skicka</span>
+                          </Button>
                         ) : (
                           <Spinner size={2} />
                         )}
