@@ -183,7 +183,11 @@ export const ServiceModule = () => {
               aria-hidden={showHistory}
               className="text-small font-light mt-sm text-light-primary "
             >
-              <Link className="text-light-primary ">
+              <Link
+                href="https://sundsvall.se/ai"
+                className="text-light-primary"
+                external
+              >
                 Så använder vi artificiell intelligens
               </Link>
             </div>
