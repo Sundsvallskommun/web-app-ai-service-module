@@ -188,12 +188,9 @@ export const ServiceModule = () => {
               aria-hidden={showHistory}
               className="text-small font-light mt-sm text-light-primary "
             >
-              <p>
-                Vår AI-assistent drivs av NLP.{" "}
-                <Link className="whitespace-nowrap text-light-primary ">
-                  Läs mer om hur vi använder AI här
+              <Link className="text-light-primary ">
+                Så använder vi artificiell intelligens
                 </Link>
-              </p>
             </div>
           </div>
         </div>
