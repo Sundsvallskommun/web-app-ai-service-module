@@ -13,7 +13,7 @@ export const MarkdownRendered: React.FC<{
         const { node, href, title } = props;
         return (
           <Link
-            tabindex={tabbable ? 0 : -1}
+            tabIndex={tabbable ? 0 : -1}
             external={href.startsWith("http")}
             href={href}
             className="block break-all my-sm"
@@ -23,10 +23,10 @@ export const MarkdownRendered: React.FC<{
         );
       },
       ol(props) {
-        return <ol className="list-decimal">{props.children}</ol>;
+        return <ol className="list-decimal ml-24">{props.children}</ol>;
       },
       ul(props) {
-        return <ul className="list-disc">{props.children}</ul>;
+        return <ul className="list-disc ml-24">{props.children}</ul>;
       },
       li(props) {
         return <li className="my-md">{props.children}</li>;
