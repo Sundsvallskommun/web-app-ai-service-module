@@ -26,6 +26,7 @@ function useChat() {
 
   const clearHistory = () => {
     setHistory([]);
+    setSessionId(null);
   };
 
   const addHistoryEntry = (
