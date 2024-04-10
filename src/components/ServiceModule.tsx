@@ -1,10 +1,8 @@
 import {
-  Accordion,
   Button,
   cx,
   FormControl,
   FormLabel,
-  Icon,
   Input,
   Link,
   Spinner,
@@ -13,11 +11,6 @@ import { useEffect, useRef, useState } from "react";
 import { useAppContext } from "../context/app.context";
 import useChat from "../hooks/useChat";
 import { getContent, getStyles } from "../services/config-service";
-import sanitized from "../services/sanitizer-service";
-import { AssistantAvatar } from "./AssistantAvatar";
-import { MarkdownRendered } from "./MarkdownRendered";
-import { ChatHeader } from "./ChatHeader";
-import { UserAvatar } from "./UserAvatar";
 import { ChatHistory } from "./ChatHistory";
 
 export const ServiceModule = () => {
@@ -102,7 +95,9 @@ export const ServiceModule = () => {
               id="query-label"
               className={cx(`text-large ${brandText} text-light-primary mb-sm`)}
             >
-              {`Ställ en fråga till ${import.meta.env.VITE_ASSISTANT_NAME}`}
+              {`Ställ en fråga till ${
+                import.meta.env.VITE_ASSISTANT_NAME || "AI-assistenten"
+              }`}
             </FormLabel>
             <div className="h-[4.8rem] flex justify-end">
               <div
@@ -188,7 +183,7 @@ export const ServiceModule = () => {
                 className="text-light-primary"
                 external
               >
-                Så använder vi artificiell intelligens
+                Hur Sundsvalls kommun använder AI
               </Link>
             </div>
           </div>
