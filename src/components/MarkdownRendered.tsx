@@ -14,11 +14,11 @@ export const MarkdownRendered: React.FC<{
         return (
           <Link
             tabindex={tabbable ? 0 : -1}
-            external
+            external={href.startsWith("http")}
             href={href}
             className="block break-all my-sm"
           >
-            {href}
+            {props.children || props.href}
           </Link>
         );
       },
