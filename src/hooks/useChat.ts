@@ -105,6 +105,7 @@ function useChat() {
 
           if (!sessionId) {
             _id = parsedData.session_id;
+            setSessionId(_id);
           }
           (references =
             parsedData.references
@@ -127,9 +128,6 @@ function useChat() {
             });
         },
         onclose() {
-          if (!sessionId) {
-            setSessionId(_id);
-          }
           setHistory((history: ChatHistory) => {
             const newHistory = [...history];
             const index = newHistory.findIndex((chat) => chat.id === answerId);
