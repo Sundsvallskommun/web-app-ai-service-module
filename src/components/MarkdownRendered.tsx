@@ -9,6 +9,9 @@ export const MarkdownRendered: React.FC<{
   <Markdown
     disallowedElements={["script", "iframe"]}
     components={{
+      p(props) {
+        return <p className="my-md">{props.children}</p>;
+      },
       a(props) {
         const { node, href, title } = props;
         return (
@@ -16,7 +19,7 @@ export const MarkdownRendered: React.FC<{
             tabIndex={tabbable ? 0 : -1}
             external={href.startsWith("http")}
             href={href}
-            className="block break-all my-sm"
+            className="my-sm"
           >
             {props.children || props.href}
           </Link>
