@@ -10,7 +10,7 @@ export const MarkdownRendered: React.FC<{
     disallowedElements={["script", "iframe"]}
     components={{
       p(props) {
-        return <p className="my-md">{props.children}</p>;
+        return <p className="my-md first:mt-xs">{props.children}</p>;
       },
       a(props) {
         const { node, href, title } = props;
