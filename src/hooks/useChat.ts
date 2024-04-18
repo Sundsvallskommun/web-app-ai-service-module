@@ -26,6 +26,7 @@ function useChat() {
 
   const clearHistory = () => {
     setHistory([]);
+    setSessionId(null);
   };
 
   const addHistoryEntry = (
@@ -82,18 +83,14 @@ function useChat() {
                 { origin: "assistant", text: "", id: answerId },
               ];
             });
-          } else if (
-            res.status >= 400 &&
-            res.status < 500 &&
-            res.status !== 429
-          ) {
+          } else if (res.status >= 400) {
+            setError(true);
             addHistoryEntry(
               "system",
               "Ett fel inträffade, assistenten gav inget svar.",
               answerId,
               []
             );
-            console.error("Client-side error ", res);
           }
           return Promise.resolve();
         },
@@ -108,6 +105,7 @@ function useChat() {
 
           if (!sessionId) {
             _id = parsedData.session_id;
+            setSessionId(_id);
           }
           (references =
             parsedData.references
@@ -130,9 +128,6 @@ function useChat() {
             });
         },
         onclose() {
-          if (!sessionId) {
-            setSessionId(_id);
-          }
           setHistory((history: ChatHistory) => {
             const newHistory = [...history];
             const index = newHistory.findIndex((chat) => chat.id === answerId);
@@ -150,9 +145,22 @@ function useChat() {
           setDone(true);
         },
         onerror(err: unknown) {
-          console.error("There was an error from server", err);
+          setError(true);
         },
-      });
+      })
+        .catch((error) => {
+          setError(true);
+          addHistoryEntry(
+            "system",
+            "Ett fel inträffade, assistenten gav inget svar.",
+            answerId,
+            []
+          );
+          setDone(true);
+        })
+        .finally(() => {
+          setDone(true);
+        });
     },
     []
   );
@@ -168,6 +176,7 @@ function useChat() {
       setDone(true);
       return;
     }
+    setError(null);
     if (stream) {
       streamQuery(query, assistantId, sessionId, user, hash);
     } else {
@@ -201,6 +210,7 @@ function useChat() {
             []
           );
           setDone(true);
+          setError(e);
         });
     }
   };

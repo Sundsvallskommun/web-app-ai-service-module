@@ -18,11 +18,10 @@ interface Styles {
 
 const VuxContent: Content = {
   header: "Hej, hur kan vi hjälpa dig idag?",
-  subHeader: "Ställ en fråga till vår AI-assistent",
+  subHeader: "Ställ en fråga till AI-assistenten",
   faqs: [
     "Vad är vuxenutbildning?",
     "Hur ansöker jag till en kurs?",
-    // "Kan jag få studievägledning?",
     "Kan jag få studiebidrag?",
     "I want to learn Swedish",
   ],
@@ -72,8 +71,8 @@ export const getContent: () => Content = () => {
       return ServanetContent;
     default:
       return {
-        header: "",
-        subHeader: "",
+        header: "Hej, hur kan vi hjälpa dig idag?",
+        subHeader: "Ställ en fråga till AI-assistenten",
         faqs: [],
       };
   }
