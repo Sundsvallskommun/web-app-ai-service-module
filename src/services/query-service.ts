@@ -1,3 +1,4 @@
+import { Feedback } from "../interfaces/feedback";
 import { SkHeaders } from "../interfaces/skHeaders";
 
 export const batchQuery = async (
@@ -19,6 +20,37 @@ export const batchQuery = async (
   return fetch(url, {
     method: "POST",
     body: JSON.stringify({ body: query }),
+    headers: {
+      Accept: "application/json",
+      ...skHeaders,
+    },
+  }).then((res) => {
+    if (res.status === 401) {
+      throw new Error("401 Not authorized");
+    }
+    return res.json();
+  });
+};
+
+export const giveFeedback = async (
+  user: string,
+  assistantId: string,
+  sessionId: string,
+  feedback: Feedback,
+  hash: string
+) => {
+  const url = `${
+    import.meta.env.VITE_API_BASE_URL
+  }/assistants/${assistantId}/sessions/${sessionId}/feedback`;
+  const skHeaders: SkHeaders = {
+    _skuser: user,
+    _skassistant: assistantId,
+    _skhash: hash,
+    _skapp: import.meta.env.VITE_APPLICATION,
+  };
+  return fetch(url, {
+    method: "POST",
+    body: JSON.stringify(feedback),
     headers: {
       Accept: "application/json",
       ...skHeaders,

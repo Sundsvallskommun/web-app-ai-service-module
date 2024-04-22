@@ -11,7 +11,7 @@ import { useEffect, useRef, useState } from "react";
 import { useAppContext } from "../context/app.context";
 import useChat from "../hooks/useChat";
 import { getContent, getStyles } from "../services/config-service";
-import { ChatHistory } from "./ChatHistory";
+import { ChatHistoryComponent } from "./ChatHistory";
 
 export const ServiceModule = () => {
   const showReferences = true;
@@ -109,12 +109,13 @@ export const ServiceModule = () => {
                 )}
               >
                 {showHistory ? (
-                  <ChatHistory
+                  <ChatHistoryComponent
                     clearHistory={clearHistory}
                     history={history}
                     showReferences={showReferences}
                     lastMessage={lastMessage}
                     scrollRef={scrollRef}
+                    done={done}
                   />
                 ) : null}
                 <div
