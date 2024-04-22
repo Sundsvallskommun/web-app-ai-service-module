@@ -20,10 +20,10 @@ const VuxContent: Content = {
   header: "Hej, hur kan vi hjälpa dig idag?",
   subHeader: "Ställ en fråga till AI-assistenten",
   faqs: [
-    "Vad är vuxenutbildning?",
-    "Hur ansöker jag till en kurs?",
-    "Kan jag få studiebidrag?",
-    "I want to learn Swedish",
+    "Hur gör jag en ansökan?",
+    "Var bokar man tid hos studievägledaren?",
+    "Hur gör man en SFI-anmälan?",
+    "How do I apply for a course?",
   ],
 };
 
