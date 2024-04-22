@@ -56,6 +56,7 @@ export const ServiceModule = () => {
             : last?.text;
         setLastMessage(lastText);
       }
+      inputRef.current?.focus();
     }
   }, [done]);
 
@@ -114,7 +115,9 @@ export const ServiceModule = () => {
                     history={history}
                     showReferences={showReferences}
                     lastMessage={lastMessage}
+                    setLastMessage={setLastMessage}
                     scrollRef={scrollRef}
+                    inputRef={inputRef}
                     done={done}
                   />
                 ) : null}
@@ -138,6 +141,7 @@ export const ServiceModule = () => {
                       <Input
                         ref={inputRef}
                         className="w-4/5"
+                        // placeholder={showHistory ? "Ställ en följdfråga" : null}
                         type="text"
                         value={query}
                         onKeyDown={(e) => {

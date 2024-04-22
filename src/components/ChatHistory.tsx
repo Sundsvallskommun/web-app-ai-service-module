@@ -16,14 +16,18 @@ export const ChatHistoryComponent: React.FC<{
   history: ChatHistory;
   showReferences;
   lastMessage;
+  setLastMessage;
   scrollRef;
+  inputRef;
   done: boolean;
 }> = ({
   clearHistory,
   history,
   showReferences,
   lastMessage,
+  setLastMessage,
   scrollRef,
+  inputRef,
   done,
 }) => {
   return (
@@ -119,6 +123,8 @@ export const ChatHistoryComponent: React.FC<{
                     msg={msg}
                     idx={idx}
                     scrollRef={scrollRef}
+                    inputRef={inputRef}
+                    setLastMessage={setLastMessage}
                   />
                 ) : null}
               </div>
