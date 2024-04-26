@@ -141,9 +141,6 @@ function useChat() {
             };
             return newHistory;
           });
-          // setHistory((history: ChatHistory) => {
-          //   return history;
-          // });
           setDone(true);
         },
         onerror(err: unknown) {

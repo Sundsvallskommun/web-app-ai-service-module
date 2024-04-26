@@ -27,14 +27,6 @@ export const ChatHistoryComponent: React.FC<{
     }
   }, [done]);
 
-  useEffect(() => {
-    console.log(
-      "history changed",
-      history?.length,
-      history?.at(-1)?.text.length
-    );
-  }, [history]);
-
   const showHistory = history.length > 0;
 
   const messageIsAriaHidden = (idx, history, done, msg) =>
