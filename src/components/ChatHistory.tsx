@@ -1,58 +1,68 @@
 import { Accordion, Button, Icon, Link, cx } from "@sk-web-gui/react";
-import { ChatHeader } from "./ChatHeader";
-import { AssistantAvatar } from "./AssistantAvatar";
-import { UserAvatar } from "./UserAvatar";
-import { MarkdownRendered } from "./MarkdownRendered";
-import sanitized from "../services/sanitizer-service";
-import { giveFeedback } from "../services/query-service";
-import { useAppContext } from "../context/app.context";
-import { ChatHistory } from "../interfaces/history";
-import { useState } from "react";
-import { Feedback } from "./Feedback";
+import { useEffect, useRef, useState } from "react";
 import useChat from "../hooks/useChat";
+import { AssistantAvatar } from "./AssistantAvatar";
+import { ChatHeader } from "./ChatHeader";
+import { Feedback } from "./Feedback";
+import { MarkdownRendered } from "./MarkdownRendered";
+import { UserAvatar } from "./UserAvatar";
 
 export const ChatHistoryComponent: React.FC<{
-  clearHistory;
-  history: ChatHistory;
-  showReferences;
-  lastMessage;
-  setLastMessage;
   scrollRef;
   inputRef;
-  done: boolean;
-}> = ({
-  clearHistory,
-  history,
-  showReferences,
-  lastMessage,
-  setLastMessage,
-  scrollRef,
-  inputRef,
-  done,
-}) => {
+}> = ({ scrollRef, inputRef }) => {
+  const { history, done, clearHistory } = useChat();
+  const [showLoading, setShowLoading] = useState<boolean>(false);
+  const timeout = useRef(setTimeout(() => {}));
+  const showReferences = true;
+
+  useEffect(() => {
+    if (!done) {
+      timeout.current = setTimeout(() => {
+        setShowLoading(true);
+      }, 3500);
+    } else {
+      clearTimeout(timeout.current);
+      setShowLoading(false);
+    }
+  }, [done]);
+
+  useEffect(() => {
+    console.log(
+      "history changed",
+      history?.length,
+      history?.at(-1)?.text.length
+    );
+  }, [history]);
+
+  const showHistory = history.length > 0;
+
+  const messageIsAriaHidden = (idx, history, done, msg) =>
+    idx === history.length - 1 && msg.origin === "assistant" ? !done : false;
+
   return (
-    <div className="relative">
-      <div className="block sm:hidden">
-        <ChatHeader open={open} setOpen={clearHistory} />
-      </div>
-      <Button
-        title="Stäng sökresultat"
-        iconButton
-        aria-label="Stäng sökresultat"
-        size="sm"
-        variant="tertiary"
-        onClick={clearHistory}
-        className="xs:hidden sm:flex absolute right-12 top-12 p-8 rounded-full flex items-center justify-center"
-      >
-        <Icon name={"x"} />
-      </Button>
-      <div
-        className="mt-sm p-16 pb-24 pr-16 h-[calc(100vh-144px)] sm:h-auto sm:max-h-[50rem] overflow-y-scroll flex flex-col"
-        tabIndex={0}
-      >
-        {history
-          .filter((msg) => msg.text !== "")
-          .map((msg, idx) => (
+    showHistory && (
+      <div className="relative">
+        <div className="block sm:hidden">
+          <ChatHeader open={open} setOpen={clearHistory} />
+        </div>
+        <Button
+          title="Stäng sökresultat"
+          iconButton
+          aria-label="Stäng sökresultat"
+          size="sm"
+          variant="tertiary"
+          onClick={clearHistory}
+          className="xs:hidden sm:flex absolute right-12 top-12 p-8 rounded-full flex items-center justify-center"
+        >
+          <Icon name={"x"} />
+        </Button>
+        <div
+          className="mt-sm p-16 pb-24 pr-16 h-[calc(100vh-144px)] sm:h-auto sm:max-h-[50rem] overflow-y-scroll flex flex-col"
+          aria-live="polite"
+          aria-atomic={false}
+        >
+          {history.map((msg, idx) => (
             <div
               key={`history-${idx}`}
               className={cx(
@@ -60,7 +70,7 @@ export const ChatHistoryComponent: React.FC<{
                 `flex items-start gap-12`
               )}
             >
-              <div aria-hidden>
+              <div aria-hidden={true}>
                 {msg.origin === "assistant" ? (
                   <AssistantAvatar />
                 ) : msg.origin === "system" ? (
@@ -69,7 +79,17 @@ export const ChatHistoryComponent: React.FC<{
                   <UserAvatar />
                 )}
               </div>
-              <div className="max-w-[85%]">
+              {idx === history.length - 1 &&
+              msg.origin === "assistant" &&
+              showLoading ? (
+                <div className="sr-only" aria-live="polite">
+                  Inväntar svar
+                </div>
+              ) : null}
+              <div
+                className="max-w-[85%]"
+                aria-hidden={messageIsAriaHidden(idx, history, done, msg)}
+              >
                 {msg.origin === "assistant" || msg.origin === "system" ? (
                   <strong>{import.meta.env.VITE_ASSISTANT_NAME}</strong>
                 ) : (
@@ -83,11 +103,16 @@ export const ChatHistoryComponent: React.FC<{
                     "max-w-full w-8/9",
                     msg.origin === "system" ? `text-error` : null
                   )}
+                  id="chat-history"
                 >
-                  <MarkdownRendered text={sanitized(msg.text)} />
+                  <MarkdownRendered
+                    text={msg.text}
+                    messageId={msg.id}
+                    hideElements={messageIsAriaHidden(idx, history, done, msg)}
+                  />
                 </div>
                 {showReferences && msg.references?.length > 0 ? (
-                  <Accordion size="sm" className="mt-20 p-0">
+                  <Accordion size="sm" className="mt-20 p-0" aria-live="off">
                     <Accordion.Item
                       className="bg-gray-100 border-1 border-gray-100 rounded-12 pl-20 pr-12 dark:text-black"
                       header={
@@ -124,17 +149,14 @@ export const ChatHistoryComponent: React.FC<{
                     idx={idx}
                     scrollRef={scrollRef}
                     inputRef={inputRef}
-                    setLastMessage={setLastMessage}
                   />
                 ) : null}
               </div>
             </div>
           ))}
-        <div aria-live={"polite"} className="sr-only">
-          <MarkdownRendered tabbable={false} text={sanitized(lastMessage)} />
+          <div ref={scrollRef}></div>
         </div>
-        <div ref={scrollRef}></div>
       </div>
-    </div>
+    )
   );
 };

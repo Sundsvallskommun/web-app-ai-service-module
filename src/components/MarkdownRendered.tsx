@@ -2,40 +2,55 @@ import { Link } from "@sk-web-gui/react";
 import Markdown from "react-markdown";
 import sanitized from "../services/sanitizer-service";
 
-export const MarkdownRendered: React.FC<{
-  text: string;
-  tabbable?: boolean;
-}> = ({ text, tabbable = true }) => (
-  <Markdown
-    disallowedElements={["script", "iframe"]}
-    components={{
-      p(props) {
-        return <p className="my-md first:mt-xs">{props.children}</p>;
-      },
-      a(props) {
-        const { node, href, title } = props;
-        return (
-          <Link
-            tabIndex={tabbable ? 0 : -1}
-            external={href.startsWith("http")}
-            href={href}
-            className="my-sm"
-          >
-            {props.children || props.href}
-          </Link>
-        );
-      },
-      ol(props) {
-        return <ol className="list-decimal ml-24">{props.children}</ol>;
-      },
-      ul(props) {
-        return <ul className="list-disc ml-24">{props.children}</ul>;
-      },
-      li(props) {
-        return <li className="my-md">{props.children}</li>;
-      },
-    }}
-  >
-    {sanitized(text)}
-  </Markdown>
-);
+const ParagraphComponent = (props) => {
+  return <p className="my-md first:mt-xs">{props.children}</p>;
+};
+
+// Create a more controlled Link component
+const LinkComponent =
+  ({ hidden, id }) =>
+  (props) => {
+    const { href, children } = props;
+    return (
+      <Link
+        key={id}
+        aria-hidden={hidden ? "true" : "false"}
+        external={href.startsWith("http")}
+        href={href}
+        className="my-sm"
+        tabIndex={hidden ? -1 : 0}
+      >
+        {children || href}
+      </Link>
+    );
+  };
+
+const OlComponent = (props) => {
+  return <ol className="list-decimal ml-24">{props.children}</ol>;
+};
+
+const UlComponent = (props) => {
+  return <ul className="list-disc ml-24">{props.children}</ul>;
+};
+
+const LiComponent = (props) => {
+  return <li className="my-md">{props.children}</li>;
+};
+
+export const MarkdownRendered = (props) => {
+  const { text, messageId, hideElements } = props;
+  return (
+    <Markdown
+      disallowedElements={["script", "iframe"]}
+      components={{
+        p: ParagraphComponent,
+        a: LinkComponent({ hidden: hideElements, id: messageId }),
+        ol: OlComponent,
+        ul: UlComponent,
+        li: LiComponent,
+      }}
+    >
+      {sanitized(text)}
+    </Markdown>
+  );
+};

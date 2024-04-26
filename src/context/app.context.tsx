@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { AssistantPublic } from "../data-contracts/data-contracts";
+import { AssistantWrapper } from "./assistant-context";
 
 export interface AppContextInterface {
   user: string;
@@ -38,7 +39,7 @@ export function AppWrapper({ children }) {
         setSessionId: (s: string) => setSessionId(s),
       }}
     >
-      {children}
+      <AssistantWrapper>{children}</AssistantWrapper>
     </AppContext.Provider>
   );
 }

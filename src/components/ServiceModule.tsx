@@ -23,6 +23,7 @@ export const ServiceModule = () => {
   const [query, setQuery] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const chatRef = useRef<HTMLDivElement>(null);
 
   const showHistory = history.length > 0;
 
@@ -56,7 +57,7 @@ export const ServiceModule = () => {
             : last?.text;
         setLastMessage(lastText);
       }
-      inputRef.current?.focus();
+      // inputRef.current?.focus();
     }
   }, [done]);
 
@@ -108,19 +109,12 @@ export const ServiceModule = () => {
                     ? "transition-all fixed left-0 right-0 bottom-0 top-0 rounded-0 sm:rounded-12 sm:absolute sm:left-[unset] sm:right-[unset] sm:bottom-[unset] sm:top-[unset]"
                     : "relative rounded-12"
                 )}
+                ref={chatRef}
               >
-                {showHistory ? (
-                  <ChatHistoryComponent
-                    clearHistory={clearHistory}
-                    history={history}
-                    showReferences={showReferences}
-                    lastMessage={lastMessage}
-                    setLastMessage={setLastMessage}
-                    scrollRef={scrollRef}
-                    inputRef={inputRef}
-                    done={done}
-                  />
-                ) : null}
+                <ChatHistoryComponent
+                  scrollRef={scrollRef}
+                  inputRef={inputRef}
+                />
                 <div
                   className={cx(
                     "flex items-center justify-center",
@@ -141,7 +135,7 @@ export const ServiceModule = () => {
                       <Input
                         ref={inputRef}
                         className="w-4/5"
-                        // placeholder={showHistory ? "Ställ en följdfråga" : null}
+                        aria-describedby="query-label"
                         type="text"
                         value={query}
                         onKeyDown={(e) => {
@@ -161,10 +155,10 @@ export const ServiceModule = () => {
                             disabled={
                               !assistantId || !query || query.trim() === ""
                             }
-                            onClick={() => {
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
                               handleQuerySubmit(query);
-                              setQuery("");
-                              inputRef.current?.focus();
                             }}
                             size="sm"
                           >
