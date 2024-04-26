@@ -6,7 +6,6 @@ const ParagraphComponent = (props) => {
   return <p className="my-md first:mt-xs">{props.children}</p>;
 };
 
-// Create a more controlled Link component
 const LinkComponent =
   ({ hidden, id }) =>
   (props) => {
