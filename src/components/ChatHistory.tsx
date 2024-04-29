@@ -49,7 +49,8 @@ export const ChatHistory: React.FC<{
                 <strong>{import.meta.env.VITE_ASSISTANT_NAME}</strong>
               ) : (
                 <>
-                  <span className="sr-only">Du</span>
+                  <strong>Du</strong>
+                  {/* <span className="sr-only">Du</span> */}
                 </>
               )}
               <div
