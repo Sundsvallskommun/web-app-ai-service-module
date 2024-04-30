@@ -22,10 +22,10 @@ const VuxContent: Content = {
   subHeader: "Skriv din fråga om vuxenutbildning till AI-assistenten",
   secondary: "The AI assistant can answer your questions in multiple languages",
   faqs: [
-    "Vad är vuxenutbildning?",
-    "Hur ansöker jag till en kurs?",
-    "Kan jag få studiebidrag?",
-    "I want to learn Swedish",
+    "Hur gör jag en ansökan?",
+    "Var bokar man tid hos studievägledaren?",
+    "Hur gör man en SFI-anmälan?",
+    "How do I apply for a course?",
   ],
 };
 
