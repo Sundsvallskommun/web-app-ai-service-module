@@ -95,9 +95,7 @@ export const ServiceModule = () => {
               id="query-label"
               className={cx(`text-large ${brandText} text-light-primary mb-sm`)}
             >
-              {`Ställ en fråga till ${
-                import.meta.env.VITE_ASSISTANT_NAME || "AI-assistenten"
-              }`}
+              {subHeader}
             </FormLabel>
             <div className="h-[4.8rem] flex justify-end">
               <div
