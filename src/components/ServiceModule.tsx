@@ -97,7 +97,9 @@ export const ServiceModule = () => {
             >
               {subHeader}
             </FormLabel>
-            {secondary ? <p>{secondary}</p> : null}
+            {secondary ? (
+              <p className="text-background-content">{secondary}</p>
+            ) : null}
             <div className="h-[4.8rem] flex justify-end">
               <div
                 className={cx(
