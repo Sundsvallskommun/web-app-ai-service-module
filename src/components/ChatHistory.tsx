@@ -44,7 +44,7 @@ export const ChatHistory: React.FC<{
                 <UserAvatar />
               )}
             </div>
-            <div className="max-w-[85%]">
+            <div className="max-w-[85%] break-words">
               {msg.origin === "assistant" || msg.origin === "system" ? (
                 <strong>{import.meta.env.VITE_ASSISTANT_NAME}</strong>
               ) : (

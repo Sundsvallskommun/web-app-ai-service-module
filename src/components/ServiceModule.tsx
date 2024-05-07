@@ -26,7 +26,7 @@ export const ServiceModule = () => {
 
   const showHistory = history.length > 0;
 
-  const { header, subHeader, faqs } = getContent();
+  const { header, subHeader, secondary, faqs } = getContent();
   const {
     brandColor,
     brandButtonColor,
@@ -97,6 +97,9 @@ export const ServiceModule = () => {
             >
               {subHeader}
             </FormLabel>
+            {secondary ? (
+              <p className="text-background-content">{secondary}</p>
+            ) : null}
             <div className="h-[4.8rem] flex justify-end">
               <div
                 className={cx(
@@ -174,14 +177,14 @@ export const ServiceModule = () => {
             </div>
             <div
               aria-hidden={showHistory}
-              className="text-small font-light mt-sm text-light-primary "
+              className="text-small font-light mt-sm text-light-primary"
             >
               <Link
                 href="https://sundsvall.se/ai"
                 className="text-light-primary"
-                external
               >
-                Hur Sundsvalls kommun använder AI
+                Hur Sundsvalls kommun använder artificiell intelligens (AI):{" "}
+                www.sundsvall.se/AI
               </Link>
             </div>
           </div>

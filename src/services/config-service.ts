@@ -1,6 +1,7 @@
 interface Content {
   header: string;
   subHeader: string;
+  secondary?: string;
   faqs: string[];
 }
 
@@ -17,8 +18,9 @@ interface Styles {
 }
 
 const VuxContent: Content = {
-  header: "Hej, hur kan vi hjälpa dig idag?",
-  subHeader: "Ställ en fråga till AI-assistenten",
+  header: "Hej, vad vill du ha hjälp med?",
+  subHeader: "Skriv din fråga om vuxenutbildning till AI-assistenten",
+  secondary: "The AI assistant can answer your questions in multiple languages",
   faqs: [
     "Hur gör jag en ansökan?",
     "Var bokar man tid hos studievägledaren?",
@@ -31,7 +33,7 @@ const VuxStyles: Partial<Styles> = {};
 
 const ServanetContent: Content = {
   header: "Låt vår AI-assistent hjälpa dig med din felsökning",
-  subHeader: "Ställ en fråga eller beskriv ditt problem",
+  subHeader: "Ställ din fråga eller beskriv ditt problem",
   faqs: [
     "Hur kopplar jag in min utrustning?",
     "Jag har inget internet - vad gör jag?",
@@ -71,7 +73,7 @@ export const getContent: () => Content = () => {
       return ServanetContent;
     default:
       return {
-        header: "Hej, hur kan vi hjälpa dig idag?",
+        header: "Hej, vad vill du ha hjälp med?",
         subHeader: "Ställ en fråga till AI-assistenten",
         faqs: [],
       };
