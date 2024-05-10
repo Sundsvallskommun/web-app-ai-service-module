@@ -41,7 +41,7 @@ function App({
   }, [user, hash, assistantId]);
 
   return (
-    <GuiProvider theme={theme}>
+    <GuiProvider theme={theme} colorScheme={colorScheme}>
       <Suspense fallback="loading">
         <ServiceModule />
       </Suspense>

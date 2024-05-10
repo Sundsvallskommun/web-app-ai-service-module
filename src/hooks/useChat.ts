@@ -15,7 +15,7 @@ import { ResponseData } from "../interfaces/responseData";
 import { SkHeaders } from "../interfaces/skHeaders";
 import { batchQuery } from "../services/query-service";
 
-const MAX_REFERENCE_COUNT = 3;
+const MAX_REFERENCE_COUNT = 100;
 
 function useChat() {
   const stream = import.meta.env.VITE_STREAM_DEFAULT === "true";

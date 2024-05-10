@@ -79,7 +79,7 @@ export const ChatHistoryComponent: React.FC<{
                 </div>
               ) : null}
               <div
-                className="max-w-[85%]"
+                className="max-w-[85%] break-words"
                 aria-hidden={messageIsAriaHidden(idx, history, done, msg)}
               >
                 {msg.origin === "assistant" || msg.origin === "system" ? (
