@@ -1,3 +1,5 @@
+import ContainerQueries from "@tailwindcss/container-queries";
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   mode: "jit",
@@ -20,6 +22,7 @@ module.exports = {
     require("@sk-web-gui/core")({
       cssBase: true,
     }),
+    ContainerQueries,
   ],
   presets: [
     {

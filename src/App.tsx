@@ -1,10 +1,5 @@
-import {
-  Button,
-  defaultTheme,
-  extendTheme,
-  GuiProvider,
-} from "@sk-web-gui/react";
-import { useEffect, useMemo, useState } from "react";
+import { defaultTheme, extendTheme, GuiProvider } from "@sk-web-gui/react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import "./App.css";
 import { ServiceModule } from "./components/ServiceModule";
 import { useAppContext } from "./context/app.context";
@@ -47,7 +42,9 @@ function App({
 
   return (
     <GuiProvider theme={theme} colorScheme={colorScheme}>
-      <ServiceModule />
+      <Suspense fallback="loading">
+        <ServiceModule />
+      </Suspense>
     </GuiProvider>
   );
 }

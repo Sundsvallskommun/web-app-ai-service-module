@@ -11,7 +11,7 @@ import { useEffect, useRef, useState } from "react";
 import { useAppContext } from "../context/app.context";
 import useChat from "../hooks/useChat";
 import { getContent, getStyles } from "../services/config-service";
-import { ChatHistory } from "./ChatHistory";
+import { ChatHistoryComponent } from "./ChatHistory";
 
 export const ServiceModule = () => {
   const showReferences = true;
@@ -23,6 +23,7 @@ export const ServiceModule = () => {
   const [query, setQuery] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const chatRef = useRef<HTMLDivElement>(null);
 
   const showHistory = history.length > 0;
 
@@ -56,6 +57,7 @@ export const ServiceModule = () => {
             : last?.text;
         setLastMessage(lastText);
       }
+      // inputRef.current?.focus();
     }
   }, [done]);
 
@@ -108,16 +110,12 @@ export const ServiceModule = () => {
                     ? "transition-all fixed left-0 right-0 bottom-0 top-0 rounded-0 sm:rounded-12 sm:absolute sm:left-[unset] sm:right-[unset] sm:bottom-[unset] sm:top-[unset]"
                     : "relative rounded-12"
                 )}
+                ref={chatRef}
               >
-                {showHistory ? (
-                  <ChatHistory
-                    clearHistory={clearHistory}
-                    history={history}
-                    showReferences={showReferences}
-                    lastMessage={lastMessage}
-                    scrollRef={scrollRef}
-                  />
-                ) : null}
+                <ChatHistoryComponent
+                  scrollRef={scrollRef}
+                  inputRef={inputRef}
+                />
                 <div
                   className={cx(
                     "flex items-center justify-center",
@@ -138,6 +136,7 @@ export const ServiceModule = () => {
                       <Input
                         ref={inputRef}
                         className="w-4/5"
+                        aria-describedby="query-label"
                         type="text"
                         value={query}
                         onKeyDown={(e) => {
@@ -157,10 +156,10 @@ export const ServiceModule = () => {
                             disabled={
                               !assistantId || !query || query.trim() === ""
                             }
-                            onClick={() => {
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
                               handleQuerySubmit(query);
-                              setQuery("");
-                              inputRef.current?.focus();
                             }}
                             size="sm"
                           >

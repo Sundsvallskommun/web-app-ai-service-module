@@ -2,8 +2,9 @@ import {
   EventSourceMessage,
   fetchEventSource,
 } from "@microsoft/fetch-event-source";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { useAppContext } from "../context/app.context";
+import { useAssistant } from "../context/assistant-context";
 import {
   ChatEntryReference,
   ChatHistory,
@@ -19,15 +20,8 @@ const MAX_REFERENCE_COUNT = 100;
 function useChat() {
   const stream = import.meta.env.VITE_STREAM_DEFAULT === "true";
   const { assistantId, sessionId, setSessionId, user, hash } = useAppContext();
-  const [history, setHistory] = useState<ChatHistory>([]);
-  const [incoming, setIncoming] = useState([]);
-  const [done, setDone] = useState(true);
-  const [error, setError] = useState(null);
-
-  const clearHistory = () => {
-    setHistory([]);
-    setSessionId(null);
-  };
+  const { history, setHistory, clearHistory, done, setDone, error, setError } =
+    useAssistant();
 
   const addHistoryEntry = (
     origin: Origin,
@@ -119,11 +113,19 @@ function useChat() {
               const index = newHistory.findIndex(
                 (chat) => chat.id === answerId
               );
-              newHistory[index] = {
-                origin: "assistant",
-                text: history[index]?.text + parsedData.answer,
-                id: answerId,
-              };
+              if (index === -1) {
+                newHistory.push({
+                  origin: "assistant",
+                  text: parsedData.answer,
+                  id: answerId,
+                });
+              } else {
+                newHistory[index] = {
+                  origin: "assistant",
+                  text: history[index]?.text + parsedData.answer,
+                  id: answerId,
+                };
+              }
               return newHistory;
             });
         },
@@ -138,9 +140,6 @@ function useChat() {
               references: references?.slice(0, MAX_REFERENCE_COUNT),
             };
             return newHistory;
-          });
-          setHistory((history: ChatHistory) => {
-            return history;
           });
           setDone(true);
         },
@@ -219,7 +218,6 @@ function useChat() {
     history,
     addHistoryEntry,
     clearHistory,
-    incoming,
     done,
     error,
     sendQuery,
