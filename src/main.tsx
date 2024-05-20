@@ -39,12 +39,6 @@ class CustomAppComponent extends HTMLElement {
       const rootElement = shadowRoot.querySelector("#servicemoduleroot");
       if (rootElement) {
         initializeReactApp(rootElement);
-        const fonts = document.createElement("link");
-        fonts.type = "text/css";
-        fonts.rel = "stylesheet";
-        fonts.href =
-          "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap";
-        document.head.appendChild(fonts);
       } else {
         console.error("Root element for React app not found.");
       }
