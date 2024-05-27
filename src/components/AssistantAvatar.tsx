@@ -10,17 +10,16 @@ export const AssistantAvatar = () => {
   return import.meta.env.VITE_APPLICATION === "VUX" ? (
     <div
       aria-label="Assistent"
-      className="w-[32px] h-[32px] bg-gronsta-surface-primary rounded-12 flex items-center justify-center"
+      className="w-32 h-32 bg-gronsta-surface-primary rounded-12 flex items-center justify-center"
     >
       <Logo size={28} bgColor="transparent" />
     </div>
   ) : import.meta.env.VITE_APPLICATION === "SERVANET" ? (
     <div
       aria-label="Assistent"
-      className={cx(
-        `bg-white rounded-12 border-1 bg-servanetlogo2 bg-center bg-contain w-[32px] h-32`
-      )}
-      style={{ backgroundImage: `url(${backgroundImageUrl})` }}
-    ></div>
+      className="w-32 h-32 bg-gronsta-surface-primary rounded-12 flex items-center justify-center"
+    >
+      <Logo size={28} bgColor="transparent" />
+    </div>
   ) : null;
 };

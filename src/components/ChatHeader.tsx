@@ -8,8 +8,8 @@ export const ChatHeader = ({ open, setOpen }) => {
     <header
       className={cx(
         "flex justify-between items-center gap-5 cursor-default",
-        "h-[62px] rounded-0 sm:rounded-tl-16 bg-primitives-gray-900 text-[#E5E5E5]",
-        open ? "p-[15px]" : "p-10 cursor-pointer"
+        "h-62 rounded-0 sm:rounded-tl-16 bg-primitives-gray-900 text-[#E5E5E5]",
+        open ? "p-[1.5rem]" : "p-10 cursor-pointer"
       )}
       role="button"
       aria-label={open ? `Stäng assistent` : `Öppna assistent`}
@@ -23,14 +23,14 @@ export const ChatHeader = ({ open, setOpen }) => {
         <div
           className={cx(
             `bg-[#65b88f] rounded-12 bg-assistant bg-center bg-contain`,
-            open ? "w-[32px] h-32" : "w-[40px] h-[40px]"
+            open ? "w-32 h-32" : "w-40 h-40"
           )}
         ></div>
       ) : import.meta.env.VITE_APPLICATION === "VUX" ? (
         <div
           className={cx(
             `bg-vattjom-surface-primary rounded-12 flex items-center justify-center`,
-            open ? "w-[32px] h-32" : "w-[40px] h-[40px]"
+            open ? "w-32 h-32" : "w-40 h-40"
           )}
         >
           <Logo size={28} bgColor="transparent" />
@@ -39,7 +39,7 @@ export const ChatHeader = ({ open, setOpen }) => {
         <div
           className={cx(
             `bg-vattjom-surface-primary dark:bg-vattjom-background-200 rounded-12 flex items-center justify-center`,
-            open ? "w-[32px] h-32" : "w-[40px] h-[40px]"
+            open ? "w-32 h-32" : "w-40 h-40"
           )}
         >
           <Logo size={28} bgColor="transparent" />

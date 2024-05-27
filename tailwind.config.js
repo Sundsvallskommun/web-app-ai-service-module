@@ -28,9 +28,7 @@ module.exports = {
     {
       theme: {
         extend: {
-          backgroundImage: {
-            servanetlogo: "url('../assets/servanetlogo.png')",
-          },
+          backgroundImage: {},
           backgroundColor: {
             vux: "#005595",
             servanet: "#0B77B9",

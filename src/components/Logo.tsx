@@ -1,11 +1,7 @@
 import { cx } from "@sk-web-gui/react";
+import servanetlogo from "./logos/servanetlogo.png";
 
 export const Logo = ({ size, bgColor }) => {
-  const APP_BASE_URL = new URL(window.location.href).pathname.replace(
-    /\/$/,
-    ""
-  );
-  const backgroundImageUrl = `${APP_BASE_URL}/assets/servanetlogo.png`;
   return import.meta.env.VITE_APPLICATION === "VUX" ? (
     <span>
       <svg
@@ -25,15 +21,15 @@ export const Logo = ({ size, bgColor }) => {
   ) : import.meta.env.VITE_APPLICATION === "SERVANET" ? (
     <div
       className={cx(
-        `bg-white rounded-12 border-1 bg-servanetlogo2 bg-center bg-contain w-[32px] h-32`
+        `bg-white rounded-10 border-1 bg-center bg-contain w-32 h-32`
       )}
-      style={{ backgroundImage: `url(${backgroundImageUrl})` }}
+      style={{ backgroundImage: `url(${servanetlogo})` }}
     ></div>
   ) : import.meta.env.VITE_APPLICATION === "QWERTY" ? (
     <div
       className={cx(
         `bg-[#65b88f] rounded-12 bg-assistant bg-center bg-contain`,
-        open ? "w-[32px] h-32" : "w-[40px] h-[40px]"
+        open ? "w-32 h-32" : "w-40 h-40"
       )}
     ></div>
   ) : null;
