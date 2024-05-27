@@ -1,6 +1,6 @@
 import { Button, Icon, cx } from "@sk-web-gui/react";
 import { useAppContext } from "../context/app.context";
-import { SundsvallsKommunLogo } from "./SundsvallsKommunLogo";
+import { Logo } from "./Logo";
 
 export const ChatHeader = ({ open, setOpen }) => {
   const { assistantId } = useAppContext();
@@ -33,7 +33,16 @@ export const ChatHeader = ({ open, setOpen }) => {
             open ? "w-[32px] h-32" : "w-[40px] h-[40px]"
           )}
         >
-          <SundsvallsKommunLogo size={28} bgColor="transparent" />
+          <Logo size={28} bgColor="transparent" />
+        </div>
+      ) : import.meta.env.VITE_APPLICATION === "SERVANET" ? (
+        <div
+          className={cx(
+            `bg-vattjom-surface-primary dark:bg-vattjom-background-200 rounded-12 flex items-center justify-center`,
+            open ? "w-[32px] h-32" : "w-[40px] h-[40px]"
+          )}
+        >
+          <Logo size={28} bgColor="transparent" />
         </div>
       ) : null}
       <div className="h-full flex-grow leading-none flex flex-col justify-around gap-2">
