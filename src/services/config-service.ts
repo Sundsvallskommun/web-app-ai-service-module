@@ -34,6 +34,7 @@ const VuxStyles: Partial<Styles> = {};
 const ServanetContent: Content = {
   header: "Låt vår AI-assistent hjälpa dig med din felsökning",
   subHeader: "Ställ din fråga eller beskriv ditt problem",
+  secondary: "The AI assistant can answer your questions in multiple languages",
   faqs: [
     "Hur kopplar jag in min utrustning?",
     "Jag har inget internet - vad gör jag?",
