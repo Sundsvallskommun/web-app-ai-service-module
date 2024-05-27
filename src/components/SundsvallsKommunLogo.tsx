@@ -20,7 +20,7 @@ export const SundsvallsKommunLogo = ({ size, bgColor }) => {
   ) : import.meta.env.VITE_APPLICATION === "SERVANET" ? (
     <div
       className={cx(
-        `bg-white rounded-full border-1 bg-servanetlogo bg-center bg-contain w-[32px] h-32`
+        `bg-white rounded-full border-1 bg-servanetlogo bg-center bg-contain w-32 h-32`
       )}
     ></div>
   ) : null;

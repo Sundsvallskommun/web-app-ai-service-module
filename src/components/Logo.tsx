@@ -21,7 +21,7 @@ export const Logo = ({ size, bgColor }) => {
   ) : import.meta.env.VITE_APPLICATION === "SERVANET" ? (
     <div
       className={cx(
-        `bg-white rounded-10 border-1 bg-center bg-contain w-[32px] h-32`
+        `bg-white rounded-10 border-1 bg-center bg-contain w-32 h-32`
       )}
       style={{ backgroundImage: `url(${servanetlogo})` }}
     ></div>
@@ -29,7 +29,7 @@ export const Logo = ({ size, bgColor }) => {
     <div
       className={cx(
         `bg-[#65b88f] rounded-12 bg-assistant bg-center bg-contain`,
-        open ? "w-[32px] h-32" : "w-[40px] h-[40px]"
+        open ? "w-32 h-32" : "w-40 h-40"
       )}
     ></div>
   ) : null;
