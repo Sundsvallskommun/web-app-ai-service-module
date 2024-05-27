@@ -3,6 +3,10 @@ interface Content {
   subHeader: string;
   secondary?: string;
   faqs: string[];
+  infoLink?: {
+    text: string;
+    url: string;
+  };
 }
 
 interface Styles {
@@ -27,6 +31,10 @@ const VuxContent: Content = {
     "Hur gör man en SFI-anmälan?",
     "How do I apply for a course?",
   ],
+  infoLink: {
+    text: "Hur Sundsvalls kommun använder artificiell intelligens (AI): www.servanet.se/AI",
+    url: "https://sundsvall.se/ai",
+  },
 };
 
 const VuxStyles: Partial<Styles> = {};
@@ -40,6 +48,10 @@ const ServanetContent: Content = {
     "Jag har inget internet - vad gör jag?",
     "Varför är min uppkoppling svajig?",
   ],
+  infoLink: {
+    text: "Hur Servanet använder artificiell intelligens (AI): www.servanet.se/AI",
+    url: "https://servanet.se/ai",
+  },
 };
 
 const ServanetStyles: Partial<Styles> = {

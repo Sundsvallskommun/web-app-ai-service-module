@@ -27,7 +27,7 @@ export const ServiceModule = () => {
 
   const showHistory = history.length > 0;
 
-  const { header, subHeader, secondary, faqs } = getContent();
+  const { header, subHeader, secondary, faqs, infoLink } = getContent();
   const {
     brandColor,
     brandButtonColor,
@@ -178,13 +178,11 @@ export const ServiceModule = () => {
               aria-hidden={showHistory}
               className="text-small font-light mt-sm text-light-primary"
             >
-              <Link
-                href="https://sundsvall.se/ai"
-                className="text-light-primary"
-              >
-                Hur Sundsvalls kommun använder artificiell intelligens (AI):{" "}
-                www.sundsvall.se/AI
-              </Link>
+              {infoLink?.text ? (
+                <Link href={infoLink.url} className="text-light-primary">
+                  {infoLink.text}
+                </Link>
+              ) : null}
             </div>
           </div>
         </div>
