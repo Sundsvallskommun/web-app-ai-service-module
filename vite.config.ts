@@ -7,7 +7,7 @@ export default defineConfig(({ command, mode }) => {
   // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
   const env = loadEnv(mode, process.cwd(), "");
   return {
-    base: "/servicemodugfdsasfdle/",
+    base: "/servicemodule/",
     plugins: [react()],
     build: {
       rollupOptions: {
