@@ -6,12 +6,14 @@ import { ChatHeader } from "./ChatHeader";
 import { Feedback } from "./Feedback";
 import { MarkdownRendered } from "./MarkdownRendered";
 import { UserAvatar } from "./UserAvatar";
+import { getStyles } from "../services/config-service";
 
 export const ChatHistoryComponent: React.FC<{
   scrollRef;
   inputRef;
 }> = ({ scrollRef, inputRef }) => {
   const { history, done, clearHistory } = useChat();
+  const { chatText, chatName, brandWeight } = getStyles();
   const [showLoading, setShowLoading] = useState<boolean>(false);
   const timeout = useRef(setTimeout(() => {}));
   const showReferences = true;
@@ -59,7 +61,8 @@ export const ChatHistoryComponent: React.FC<{
               key={`history-${idx}`}
               className={cx(
                 idx === history.length - 1 ? "mb-0" : "mb-24",
-                `flex items-start gap-12`
+                `flex items-start gap-12`,
+                chatText
               )}
             >
               <div aria-hidden={true}>
@@ -83,7 +86,9 @@ export const ChatHistoryComponent: React.FC<{
                 aria-hidden={messageIsAriaHidden(idx, history, done, msg)}
               >
                 {msg.origin === "assistant" || msg.origin === "system" ? (
-                  <strong>{import.meta.env.VITE_ASSISTANT_NAME}</strong>
+                  <span className={cx(`${chatName}`)}>
+                    {import.meta.env.VITE_ASSISTANT_NAME}
+                  </span>
                 ) : (
                   <>
                     <span className="sr-only">Du</span>
@@ -108,7 +113,7 @@ export const ChatHistoryComponent: React.FC<{
                     <Accordion.Item
                       className="bg-gray-100 border-1 border-gray-100 rounded-12 pl-20 pr-12 dark:text-black"
                       header={
-                        <span className="dark:text-black">
+                        <span className={cx(`dark:text-black ${brandWeight}`)}>
                           Kunskapskällor ({msg.references?.length || 0})
                         </span>
                       }

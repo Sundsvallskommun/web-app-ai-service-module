@@ -14,6 +14,11 @@ interface Styles {
   brandButtonColor: string;
   brandHeader: string;
   brandText: string;
+  brandWeight: string;
+  chatText: string;
+  chatName: string;
+  faqText: string;
+  brandSansSerif: string;
   brandRadius: string;
   brandWidth: string;
   brandMaxWidth: string;
@@ -37,7 +42,12 @@ const VuxContent: Content = {
   },
 };
 
-const VuxStyles: Partial<Styles> = {};
+const VuxStyles: Partial<Styles> = {
+  brandText: "font-vuxDisplay",
+  brandWeight: "font-bold",
+  chatName: "font-bold",
+  faqText: "font-medium",
+};
 
 const ServanetContent: Content = {
   header: "Låt vår AI-assistent hjälpa dig med din felsökning",
@@ -58,7 +68,12 @@ const ServanetStyles: Partial<Styles> = {
   brandColor: "bg-servanet dark:bg-servanetDark",
   brandButtonColor: "bg-[#66677B]",
   brandHeader: "!font-medium font-servanetHeader",
-  brandText: "font-semibold font-servanetDisplay",
+  brandText: "font-servanetDisplay",
+  brandSansSerif: "font-servanetDisplay",
+  brandWeight: "font-semibold",
+  chatText: "font-servanetDisplay tracking-[-.16px]",
+  chatName: "font-semibold text-large",
+  faqText: "font-servanetDisplay font-medium",
   brandRadius: "rounded-6",
   brandWidth: "xl:w-[66rem]",
   brandMaxWidth: "max-w-[66rem]",
@@ -70,7 +85,12 @@ const defaultStyles: Styles = {
   brandColor: "bg-vattjom-surface-primary",
   brandButtonColor: "",
   brandHeader: "!font-extrabold font-header",
-  brandText: "font-bold",
+  brandText: "",
+  brandWeight: "font-bold",
+  chatText: "",
+  chatName: "",
+  faqText: "",
+  brandSansSerif: "",
   brandRadius: "rounded-18",
   brandWidth: "xl:w-[64rem]",
   brandMaxWidth: "max-w-[64rem]",

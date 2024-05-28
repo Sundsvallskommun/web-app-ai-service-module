@@ -33,6 +33,8 @@ export const ServiceModule = () => {
     brandButtonColor,
     brandHeader,
     brandText,
+    brandWeight,
+    faqText,
     brandRadius,
     brandWidth,
     brandMaxWidth,
@@ -70,9 +72,7 @@ export const ServiceModule = () => {
   return (
     <>
       <div
-        className={cx(
-          `m-0 md:m-16 flex flex-nowrap justify-center font-display text-left`
-        )}
+        className={cx(`m-0 md:m-16 flex flex-nowrap justify-center text-left`)}
       >
         <div
           className={cx(
@@ -95,7 +95,9 @@ export const ServiceModule = () => {
             <FormLabel
               htmlFor="query"
               id="query-label"
-              className={cx(`text-large ${brandText} text-light-primary mb-sm`)}
+              className={cx(
+                `text-large ${brandText} ${brandWeight} text-light-primary mb-sm`
+              )}
             >
               {subHeader}
             </FormLabel>
@@ -176,7 +178,7 @@ export const ServiceModule = () => {
             </div>
             <div
               aria-hidden={showHistory}
-              className="text-small font-light mt-sm text-light-primary"
+              className={cx(`text-small font-light mt-sm text-light-primary`)}
             >
               {infoLink?.text ? (
                 <Link href={infoLink.url} className="text-light-primary">
@@ -192,10 +194,18 @@ export const ServiceModule = () => {
             brandRadius ? brandRadius : "rounded-r-18"
           )}
         >
-          <h3 className={cx(`text-large ${brandText} text-dark-primary`)}>
+          <h3
+            className={cx(
+              `text-large ${brandText} ${brandWeight} text-dark-primary`
+            )}
+          >
             Vanliga frågor
           </h3>
-          <ul className="md:flex flex-col justify-center items-start self-stretch gap-12">
+          <ul
+            className={cx(
+              `md:flex flex-col justify-center items-start self-stretch gap-12 ${faqText}`
+            )}
+          >
             {faqs.map((s, idx) => (
               <li key={idx}>
                 <Button
@@ -209,8 +219,9 @@ export const ServiceModule = () => {
                     inputRef.current?.focus();
                   }}
                   className={cx(
-                    `p-12 font-semibold text-grey-900 text-small flex items-center justify-around gap-12 rounded-bl-0`,
-                    brandButtons
+                    `p-12 text-grey-900 text-small flex items-center justify-around gap-12 rounded-bl-0`,
+                    brandButtons,
+                    faqText
                   )}
                 >
                   {s}
