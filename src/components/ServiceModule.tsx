@@ -102,7 +102,9 @@ export const ServiceModule = () => {
               {subHeader}
             </FormLabel>
             {secondary ? (
-              <p className="text-background-content">{secondary}</p>
+              <p className={cx(`text-background-content`, brandText)}>
+                {secondary}
+              </p>
             ) : null}
             <div className="h-[4.8rem] flex justify-end">
               <div
@@ -154,7 +156,12 @@ export const ServiceModule = () => {
                       <Input.RightAddin icon className="pr-8">
                         {done ? (
                           <Button
-                            className={cx(`flex ${brandButtonColor}`)}
+                            className={cx(
+                              `flex`,
+                              brandButtonColor,
+                              brandText,
+                              brandWeight
+                            )}
                             disabled={
                               !assistantId || !query || query.trim() === ""
                             }
