@@ -72,7 +72,9 @@ export const ServiceModule = () => {
   return (
     <>
       <div
-        className={cx(`m-0 md:m-16 flex flex-nowrap justify-center text-left`)}
+        className={cx(
+          `m-0 md:m-16 flex flex-nowrap justify-center text-left relative z-[1000000] sm:z-[unset]`
+        )}
       >
         <div
           className={cx(
@@ -123,6 +125,7 @@ export const ServiceModule = () => {
                 <div
                   className={cx(
                     "flex items-center justify-center",
+                    brandText,
                     showHistory ? `p-2 border-t` : "p-0"
                   )}
                 >
