@@ -188,7 +188,8 @@ export const ServiceModule = () => {
         </div>
         <div
           className={cx(
-            `w-[36rem] p-40 bg-background-content rounded-r-18 hidden md:flex flex-col justify-start items-start self-stretch gap-12 shadow-xl`
+            `w-[36rem] p-40 bg-background-content rounded-l-none hidden md:flex flex-col justify-start items-start self-stretch gap-12 shadow-xl`,
+            brandRadius ? brandRadius : "rounded-r-18"
           )}
         >
           <h3 className={cx(`text-large ${brandText} text-dark-primary`)}>
