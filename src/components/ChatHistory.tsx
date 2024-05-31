@@ -36,7 +36,7 @@ export const ChatHistoryComponent: React.FC<{
 
   return (
     showHistory && (
-      <div className="relative">
+      <div className="relative h-full flex flex-col justify-between">
         <div className="block sm:hidden">
           <ChatHeader open={open} setOpen={clearHistory} />
         </div>
@@ -52,7 +52,7 @@ export const ChatHistoryComponent: React.FC<{
           <Icon name={"x"} />
         </Button>
         <div
-          className="mt-sm p-16 pb-24 pr-16 h-[calc(100dvh-14.4rem)] sm:h-auto sm:max-h-[50rem] overflow-y-scroll flex flex-col"
+          className="mt-sm p-16 pb-24 pr-16 max-h-[calc(100dvh-14.4rem)] sm:h-auto sm:max-h-[50rem] overflow-y-scroll flex flex-col"
           aria-live="polite"
           aria-atomic={false}
         >
