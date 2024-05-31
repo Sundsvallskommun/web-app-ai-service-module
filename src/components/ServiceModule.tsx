@@ -142,7 +142,7 @@ export const ServiceModule = () => {
                     >
                       <Input
                         ref={inputRef}
-                        className="w-4/5"
+                        className="w-4/5 !outline-none"
                         aria-describedby="query-label"
                         type="text"
                         value={query}
@@ -172,6 +172,7 @@ export const ServiceModule = () => {
                               e.preventDefault();
                               e.stopPropagation();
                               handleQuerySubmit(query);
+                              setQuery("");
                             }}
                             size="sm"
                           >
