@@ -73,7 +73,8 @@ export const ServiceModule = () => {
     <>
       <div
         className={cx(
-          `m-0 md:m-16 flex flex-nowrap justify-center text-left relative z-[1000000] sm:z-[unset]`
+          `m-0 md:m-16 flex flex-nowrap justify-center text-left relative`,
+          showHistory ? `z-[1000000] sm:z-[unset]` : `z-[2]`
         )}
       >
         <div
