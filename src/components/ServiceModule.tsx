@@ -27,12 +27,14 @@ export const ServiceModule = () => {
 
   const showHistory = history.length > 0;
 
-  const { header, subHeader, secondary, faqs } = getContent();
+  const { header, subHeader, secondary, faqs, infoLink } = getContent();
   const {
     brandColor,
     brandButtonColor,
     brandHeader,
     brandText,
+    brandWeight,
+    faqText,
     brandRadius,
     brandWidth,
     brandMaxWidth,
@@ -71,7 +73,8 @@ export const ServiceModule = () => {
     <>
       <div
         className={cx(
-          `m-0 md:m-16 flex flex-nowrap justify-center font-display text-left`
+          `m-0 md:m-16 flex flex-nowrap justify-center text-left relative`,
+          showHistory ? `z-[1000000] sm:z-[unset]` : `z-[2]`
         )}
       >
         <div
@@ -95,12 +98,16 @@ export const ServiceModule = () => {
             <FormLabel
               htmlFor="query"
               id="query-label"
-              className={cx(`text-large ${brandText} text-light-primary mb-sm`)}
+              className={cx(
+                `text-large ${brandText} ${brandWeight} text-light-primary mb-sm`
+              )}
             >
               {subHeader}
             </FormLabel>
             {secondary ? (
-              <p className="text-background-content">{secondary}</p>
+              <p className={cx(`text-background-content`, brandText)}>
+                {secondary}
+              </p>
             ) : null}
             <div className="h-[4.8rem] flex justify-end">
               <div
@@ -119,6 +126,7 @@ export const ServiceModule = () => {
                 <div
                   className={cx(
                     "flex items-center justify-center",
+                    brandText,
                     showHistory ? `p-2 border-t` : "p-0"
                   )}
                 >
@@ -135,7 +143,7 @@ export const ServiceModule = () => {
                     >
                       <Input
                         ref={inputRef}
-                        className="w-4/5"
+                        className="w-4/5 !outline-none"
                         aria-describedby="query-label"
                         type="text"
                         value={query}
@@ -152,7 +160,12 @@ export const ServiceModule = () => {
                       <Input.RightAddin icon className="pr-8">
                         {done ? (
                           <Button
-                            className={cx(`flex ${brandButtonColor}`)}
+                            className={cx(
+                              `flex`,
+                              brandButtonColor,
+                              brandText,
+                              brandWeight
+                            )}
                             disabled={
                               !assistantId || !query || query.trim() === ""
                             }
@@ -160,6 +173,7 @@ export const ServiceModule = () => {
                               e.preventDefault();
                               e.stopPropagation();
                               handleQuerySubmit(query);
+                              setQuery("");
                             }}
                             size="sm"
                           >
@@ -176,27 +190,34 @@ export const ServiceModule = () => {
             </div>
             <div
               aria-hidden={showHistory}
-              className="text-small font-light mt-sm text-light-primary"
+              className={cx(`text-small font-light mt-sm text-light-primary`)}
             >
-              <Link
-                href="https://sundsvall.se/ai"
-                className="text-light-primary"
-              >
-                Hur Sundsvalls kommun använder artificiell intelligens (AI):{" "}
-                www.sundsvall.se/AI
-              </Link>
+              {infoLink?.text ? (
+                <Link href={infoLink.url} className="text-light-primary">
+                  {infoLink.text}
+                </Link>
+              ) : null}
             </div>
           </div>
         </div>
         <div
           className={cx(
-            `w-[36rem] p-40 bg-background-content rounded-r-18 hidden md:flex flex-col justify-start items-start self-stretch gap-12 shadow-xl`
+            `w-[36rem] p-40 bg-background-content rounded-l-none hidden md:flex flex-col justify-start items-start self-stretch gap-12 shadow-xl`,
+            brandRadius ? brandRadius : "rounded-r-18"
           )}
         >
-          <h3 className={cx(`text-large ${brandText} text-dark-primary`)}>
+          <h3
+            className={cx(
+              `text-large ${brandText} ${brandWeight} text-dark-primary`
+            )}
+          >
             Vanliga frågor
           </h3>
-          <ul className="md:flex flex-col justify-center items-start self-stretch gap-12">
+          <ul
+            className={cx(
+              `md:flex flex-col justify-center items-start self-stretch gap-12 ${faqText}`
+            )}
+          >
             {faqs.map((s, idx) => (
               <li key={idx}>
                 <Button
@@ -210,8 +231,9 @@ export const ServiceModule = () => {
                     inputRef.current?.focus();
                   }}
                   className={cx(
-                    `p-12 font-semibold text-grey-900 text-small flex items-center justify-around gap-12 rounded-bl-0`,
-                    brandButtons
+                    `p-12 text-grey-900 text-small flex items-center justify-around gap-12 rounded-bl-0`,
+                    brandButtons,
+                    faqText
                   )}
                 >
                   {s}

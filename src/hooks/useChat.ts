@@ -1,3 +1,4 @@
+import * as uuid from "uuid";
 import {
   EventSourceMessage,
   fetchEventSource,
@@ -42,8 +43,8 @@ function useChat() {
 
   const streamQuery = useCallback(
     (query: string, assistantId: string, session_id: string, u, h) => {
-      const answerId = crypto.randomUUID();
-      const questionId = crypto.randomUUID();
+      const answerId = uuid.v4();
+      const questionId = uuid.v4();
       addHistoryEntry("user", query, questionId);
       setDone(false);
       const url = `${
@@ -180,8 +181,8 @@ function useChat() {
       streamQuery(query, assistantId, sessionId, user, hash);
     } else {
       setDone(false);
-      const answerId = crypto.randomUUID();
-      const questionId = crypto.randomUUID();
+      const answerId = uuid.v4();
+      const questionId = uuid.v4();
       addHistoryEntry("user", query, questionId);
       return batchQuery(query, assistantId, sessionId, user, hash)
         .then((res: ResponseData) => {

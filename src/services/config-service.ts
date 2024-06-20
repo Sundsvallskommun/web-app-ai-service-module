@@ -3,6 +3,10 @@ interface Content {
   subHeader: string;
   secondary?: string;
   faqs: string[];
+  infoLink?: {
+    text: string;
+    url: string;
+  };
 }
 
 interface Styles {
@@ -10,6 +14,11 @@ interface Styles {
   brandButtonColor: string;
   brandHeader: string;
   brandText: string;
+  brandWeight: string;
+  chatText: string;
+  chatName: string;
+  faqText: string;
+  brandSansSerif: string;
   brandRadius: string;
   brandWidth: string;
   brandMaxWidth: string;
@@ -27,25 +36,44 @@ const VuxContent: Content = {
     "Hur gör man en SFI-anmälan?",
     "How do I apply for a course?",
   ],
+  infoLink: {
+    text: "Hur Sundsvalls kommun använder artificiell intelligens (AI): www.servanet.se/AI",
+    url: "https://sundsvall.se/ai",
+  },
 };
 
-const VuxStyles: Partial<Styles> = {};
+const VuxStyles: Partial<Styles> = {
+  brandText: "font-vuxDisplay",
+  brandWeight: "font-bold",
+  chatName: "font-bold",
+  faqText: "font-medium",
+};
 
 const ServanetContent: Content = {
   header: "Låt vår AI-assistent hjälpa dig med din felsökning",
   subHeader: "Ställ din fråga eller beskriv ditt problem",
+  secondary: "The AI assistant can answer your questions in multiple languages",
   faqs: [
     "Hur kopplar jag in min utrustning?",
     "Jag har inget internet - vad gör jag?",
     "Varför är min uppkoppling svajig?",
   ],
+  infoLink: {
+    text: "Hur Servanet använder artificiell intelligens (AI): www.servanet.se/AI",
+    url: "https://servanet.se/ai",
+  },
 };
 
 const ServanetStyles: Partial<Styles> = {
   brandColor: "bg-servanet dark:bg-servanetDark",
   brandButtonColor: "bg-[#66677B]",
   brandHeader: "!font-medium font-servanetHeader",
-  brandText: "font-semibold font-servanetDisplay",
+  brandText: "font-servanetDisplay",
+  brandSansSerif: "font-servanetDisplay",
+  brandWeight: "font-semibold",
+  chatText: "font-servanetDisplay tracking-[-.16px]",
+  chatName: "font-semibold text-large",
+  faqText: "font-servanetDisplay font-medium",
   brandRadius: "rounded-6",
   brandWidth: "xl:w-[66rem]",
   brandMaxWidth: "max-w-[66rem]",
@@ -57,7 +85,12 @@ const defaultStyles: Styles = {
   brandColor: "bg-vattjom-surface-primary",
   brandButtonColor: "",
   brandHeader: "!font-extrabold font-header",
-  brandText: "font-bold",
+  brandText: "",
+  brandWeight: "font-bold",
+  chatText: "",
+  chatName: "",
+  faqText: "",
+  brandSansSerif: "",
   brandRadius: "rounded-18",
   brandWidth: "xl:w-[64rem]",
   brandMaxWidth: "max-w-[64rem]",

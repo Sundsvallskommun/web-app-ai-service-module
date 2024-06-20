@@ -154,7 +154,7 @@ export const Feedback: React.FC<{
             </div>
             {showFeedbackReason ? (
               <div
-                className="flex flex-row items-center gap-8 justify-start text[1.4rem]"
+                className="flex flex-row flex-wrap items-center gap-8 justify-start text[1.4rem]"
                 role="menu"
               >
                 {["Innehåller faktafel", "Inte nöjd med svaret"].map(
